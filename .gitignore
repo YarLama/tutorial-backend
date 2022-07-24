@@ -4,6 +4,7 @@
 
 # Logs
 logs
+source.txt
 *.log
 npm-debug.log*
 pnpm-debug.log*
