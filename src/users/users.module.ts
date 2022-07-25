@@ -17,6 +17,9 @@ import { RolesModule } from 'src/roles/roles.module';
       UserRoles
     ]),
     RolesModule
+  ],
+  exports: [
+    UsersService
   ]
 })
 export class UsersModule {}
