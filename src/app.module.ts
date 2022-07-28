@@ -7,6 +7,13 @@ import { RolesModule } from './roles/roles.module';
 import { Role } from "./roles/roles.model";
 import { UserRoles } from "./roles/user-roles.model";
 import { AuthModule } from './auth/auth.module';
+import { PostsService } from './posts/posts.service';
+import { PostsController } from './posts/posts.controller';
+import { PostsModule } from './posts/posts.module';
+import { Post } from "./posts/posts.model";
+import { FilesModule } from './files/files.module';
+import { ServeStaticModule } from "@nestjs/serve-static";
+import * as path from "path";
 
 @Module( {
     controllers: [],
@@ -14,6 +21,9 @@ import { AuthModule } from './auth/auth.module';
     imports: [
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`
+        }),
+        ServeStaticModule.forRoot({
+            rootPath: path.resolve(__dirname, 'static')
         }),
         SequelizeModule.forRoot({
             dialect: 'postgres',
@@ -25,13 +35,16 @@ import { AuthModule } from './auth/auth.module';
             models: [
                 User,
                 Role,
-                UserRoles
+                UserRoles,
+                Post,
             ],
             autoLoadModels: true,
           }),
         UsersModule,
         RolesModule,
         AuthModule,
+        PostsModule,
+        FilesModule,
     ]
 })
 export class AppModule {}
